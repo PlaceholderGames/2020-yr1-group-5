@@ -1,4 +1,4 @@
-# PyGame template.
+# PyGame template. https://gist.github.com/MatthewJA/7544830
  
 # Import standard modules.
 import sys
