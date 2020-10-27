@@ -1,4 +1,4 @@
-# PyGame template. https://gist.github.com/MatthewJA/7544830
+# PyGame template.
  
 # Import standard modules.
 import sys
@@ -6,6 +6,9 @@ import sys
 # Import non-standard modules.
 import pygame
 from pygame.locals import *
+
+import grid
+from grid import Grid
  
 def update(dt):
   """
@@ -28,7 +31,10 @@ def update(dt):
       sys.exit() # Not including this line crashes the script on Windows. Possibly
       # on other operating systems too, but I don't know for sure.
     # Handle other events as you wish.
- 
+
+# Initialize the grid
+grid = Grid((10, 30), 15, 15, 25)
+
 def draw(screen):
   """
   Draw things to the window. Called once per frame.
@@ -37,6 +43,9 @@ def draw(screen):
   
   # Redraw screen here.
   
+  # Draw the grid
+  grid.draw(screen)
+
   # Flip the display so that the things we drew actually show up.
   pygame.display.flip()
  
