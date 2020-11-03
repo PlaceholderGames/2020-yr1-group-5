@@ -11,10 +11,26 @@ from pygame.locals import *
 import grid
 from grid import Grid
 
+import tower
+from tower import Tower
+
 FPS = 144.0
 
+# Define a sprite list
+tower_list = pygame.sprite.Group()
+
 # Initialize the grid
-grid = Grid((30, 30), 15, 15, 25)
+grid = Grid((0, 0), 15, 15, 40)
+
+# Initialize a tower
+tower = Tower()
+
+# Set it's location
+tower.rect.x = 50
+tower.rect.y = 50
+
+# Add the tower to a sprite list
+tower_list.add(tower)
 
 
 def update(dt):
@@ -40,7 +56,9 @@ def update(dt):
         elif event.type == MOUSEBUTTONDOWN:
             print("CLICK!")
 
+            # Get position of the mouse cursor
             pos = pygame.mouse.get_pos()
+            # Get position of the mouse in the grid coordinates
             grid_pos = grid.get_grid_pos(pos)
             print(grid_pos)
 
@@ -68,6 +86,8 @@ def draw(screen):
     # Draw the grid
     grid.draw(screen)
 
+    tower_list.draw(screen)
+
     # Flip the display so that the things we drew actually show up.
     pygame.display.flip()
 
@@ -81,7 +101,7 @@ def runPyGame():
     fpsClock = pygame.time.Clock()
 
     # Set up the window.
-    width, height = 640, 480
+    width, height = 480, 480
     screen = pygame.display.set_mode((width, height))
 
     # screen is the surface representing the window.
