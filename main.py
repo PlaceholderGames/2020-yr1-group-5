@@ -1,17 +1,16 @@
 # PyGame template.
 
 # Import standard modules.
-import sys
 import math
+import sys
 
 # Import non-standard modules.
 import pygame
 from pygame.locals import *
 
 import grid
-from grid import Grid
-
 import tower
+from grid import Grid
 from tower import Tower
 
 FPS = 144.0
@@ -68,7 +67,7 @@ def update(dt):
 
             # On right mouse click set the cells value to 64.
             elif event.button == 3:
-                grid.set_value(grid_pos, 64)
+                grid.set_value(grid_pos, 1)
 
     # Handle other events as you wish.
 

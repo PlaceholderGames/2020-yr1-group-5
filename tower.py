@@ -5,8 +5,7 @@ import os, pygame
 class Tower(pygame.sprite.Sprite):
     
     def __init__(self):
-        # Call the parent class constructor
-        pygame.sprite.Sprite.__init__(self)
+        super().__init__()
 
         # Load an image to display
         self.image = pygame.image.load(os.path.join('Assets', 'towerDefense_tile206.png'))
