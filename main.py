@@ -53,8 +53,6 @@ def update(dt):
             sys.exit()  # Not including this line crashes the script on Windows. Possibly
             # on other operating systems too, but I don't know for sure.
         elif event.type == MOUSEBUTTONDOWN:
-            print("CLICK!")
-
             # Get position of the mouse cursor
             pos = pygame.mouse.get_pos()
             # Get position of the mouse in the grid coordinates

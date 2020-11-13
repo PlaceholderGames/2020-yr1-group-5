@@ -6,9 +6,6 @@ from pygame import math
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 
-import tower
-from tower import Tower
-
 class Grid():
     # Position of the upper left corner
     init_pos = math.Vector2
@@ -21,9 +18,7 @@ class Grid():
 
     cells = list()
 
-    color = WHITE
-
-    tower_list = pygame.sprite.Group()
+    cell_color = WHITE
 
     def __init__(self, init_pos=math.Vector2(0, 0), width=None, height=None, cell_size=None):
         self.width = width
@@ -40,7 +35,6 @@ class Grid():
         y = m.floor((pos[1] - self.init_pos[1])/self.cell_size)
         return math.Vector2(x, y)
 
-    # Not sure it's working
     def set_value(self, grid_pos, value):
         self.cells[int(grid_pos[0])][int(grid_pos[1])] = value
 
@@ -53,24 +47,14 @@ class Grid():
         for x in range(self.width):
             for y in range(self.height):
                 if self.cells[x][y] == 0:
-                    self.color = WHITE
+                    self.cell_color = WHITE
                 else:
-                    self.color = RED
+                    self.cell_color = RED
 
                 rect = pygame.Rect((x*self.cell_size) + self.init_pos[0],
                                    (y*self.cell_size) + self.init_pos[1],
                                    self.cell_size, self.cell_size)
-                pygame.draw.rect(screen, self.color, rect, 3)
-                self.tower_list.draw(screen)
+                pygame.draw.rect(screen, self.cell_color, rect, 3)
 
     def update(self, dt):
-        for x in range(self.width):
-            for y in range(self.height):
-                if self.cells[x][y] == 1:
-                    tower = Tower()
-                    tower.rect.x = (x*self.cell_size) + self.init_pos[0]
-                    tower.rect.y = (y*self.cell_size) + self.init_pos[1]
-                    self.tower_list.add(tower)
-                    self.cells[x][y] = 2
-                else:
-                    pass
+        pass
