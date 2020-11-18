@@ -19,17 +19,7 @@ FPS = 144.0
 tower_list = pygame.sprite.Group()
 
 # Initialize the grid
-grid = Grid((0, 0), 15, 15, 40)
-
-# Initialize a tower
-tower = Tower()
-
-# Set it's location
-tower.rect.x = 50
-tower.rect.y = 50
-
-# Add the tower to a sprite list
-tower_list.add(tower)
+grid = Grid((0, 0), 7, 7, 64)
 
 
 def update(dt):
@@ -52,24 +42,39 @@ def update(dt):
             pygame.quit()  # Opposite of pygame.init
             sys.exit()  # Not including this line crashes the script on Windows. Possibly
             # on other operating systems too, but I don't know for sure.
+
+        # When 'Delete' is pressed the grid is cleared
+        elif event.type == KEYDOWN:
+            if event.key == K_DELETE:
+                grid.cells = [[0 for j in range(grid.width)] for i in range(grid.height)]
+                tower_list.empty()
         elif event.type == MOUSEBUTTONDOWN:
             # Get position of the mouse cursor
             pos = pygame.mouse.get_pos()
             # Get position of the mouse in the grid coordinates
-            grid_pos = grid.get_grid_pos(pos)
+            grid_pos = grid.getGridPos(pos)
             print(grid_pos)
 
             # On left mouse click print the value of the cell.
             if event.button == 1:
-                print(grid.get_value(pygame.math.Vector2(grid_pos)))
+                print(grid.getValue(pygame.math.Vector2(grid_pos)))
 
             # On right mouse click set the cells value to 64.
             elif event.button == 3:
-                grid.set_value(grid_pos, 1)
+                grid.setValue(grid_pos, 1)
 
     # Handle other events as you wish.
 
     grid.update(dt)
+
+    for x in range(grid.width):
+        for y in range(grid.height):
+            if grid.getValue((x, y)) == 1:
+                tower = Tower()
+                tower.rect.x = (x * grid.cellSize) + grid.initPos[0]
+                tower.rect.y = (y * grid.cellSize) + grid.initPos[1]
+                tower_list.add(tower)
+                grid.setValue((x, y), 2)
 
 
 def draw(screen):
