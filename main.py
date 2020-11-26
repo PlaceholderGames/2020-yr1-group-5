@@ -7,6 +7,7 @@ import sys
 # Import non-standard modules.
 import pygame
 from pygame.locals import *
+from pygame import math
 
 import grid
 import tower
@@ -46,13 +47,14 @@ def update(dt):
         # When 'Delete' is pressed the grid is cleared
         elif event.type == KEYDOWN:
             if event.key == K_DELETE:
-                grid.cells = [[0 for j in range(grid.width)] for i in range(grid.height)]
+                grid.cells = [[0 for j in range(grid.width)]
+                              for i in range(grid.height)]
                 tower_list.empty()
         elif event.type == MOUSEBUTTONDOWN:
             # Get position of the mouse cursor
             pos = pygame.mouse.get_pos()
             # Get position of the mouse in the grid coordinates
-            grid_pos = grid.getGridPos(pos)
+            grid_pos = grid.getGridPos(pos) if grid.getGridPos(pos).x < grid.width and grid.getGridPos(pos).y < grid.height else (0, 0)
             print(grid_pos)
 
             # On left mouse click print the value of the cell.

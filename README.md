@@ -8,4 +8,5 @@ CS1S464 2020 Group 5
 - [x] Draw a sprite
 - [x] Draw a sprite on the grid
 - [ ] Fix out of range exeptions when clicking outside the grid
+  - [x] Doesn't crash anymore
 - [ ] Figure out what more we'll need
