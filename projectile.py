@@ -23,5 +23,6 @@ class Projectile(pygame.sprite.Sprite):
 
     def update(self, dt, grid) -> None:
         self.rect.x += 0.5 * dt
+
         if self.rect.x > grid.width * grid.cellSize:
             self.kill()

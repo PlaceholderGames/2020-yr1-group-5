@@ -1,7 +1,8 @@
-# PyGame template.
+# PyGame template. https://gist.github.com/MatthewJA/7544830
 
 # Import standard modules.
-import math
+import math as m
+import random
 import sys
 
 # Import non-standard modules.
@@ -12,6 +13,7 @@ from pygame import math
 from grid import Grid
 from tower import Tower
 from projectile import Projectile
+from enemy import Enemy
 
 FPS = 144.0
 
@@ -19,11 +21,14 @@ GRID_CELL_SIZE = 64
 GRID_WIDTH = 10
 GRID_HEIGHT = 10
 
-shootEvent = pygame.USEREVENT + 1
+# Custom events
+shootEvent = pygame.USEREVENT + 0
+spawnEnemy = pygame.USEREVENT + 1
 
 # Define lists of sprites
 towers = pygame.sprite.Group()
 projectiles = pygame.sprite.Group()
+enemies = pygame.sprite.Group()
 allSprites = pygame.sprite.Group()
 
 # Initialize the grid
@@ -56,8 +61,8 @@ def update(dt):
             if event.key == K_DELETE:
                 grid.cells = [[0 for j in range(grid.width)]
                               for i in range(grid.height)]
-                projectiles.empty()
-                towers.empty()
+                for sprite in allSprites:
+                    sprite.kill()
 
         elif event.type == MOUSEBUTTONDOWN:
             # Get position of the mouse cursor
@@ -85,11 +90,20 @@ def update(dt):
                         projectiles.add(projectile)
                         allSprites.add(projectile)
 
+        elif event.type == spawnEnemy:
+            enemy = Enemy()
+            enemy.rect.x = (grid.width * grid.cellSize) + 128 + grid.initPos[0]
+            enemy.rect.y = (m.floor(random.uniform(0, grid.height)) * grid.cellSize) + grid.initPos[1]
+            enemies.add(enemy)
+            allSprites.add(enemy)
+            print("SPAWN")
+
     # Handle other events as you wish.
 
     grid.update(dt)
     towers.update()
     projectiles.update(dt, grid)
+    enemies.update(dt, projectiles)
 
     # Add a tower on the grid if it is supposed to be there.
     for x in range(grid.width):
@@ -114,14 +128,14 @@ def draw(screen):
     # Draw the grid
     grid.draw(screen)
 
-    towers.draw(screen)
-    projectiles.draw(screen)
+    allSprites.draw(screen)
 
     # Flip the display so that the things we drew actually show up.
     pygame.display.flip()
 
 
 pygame.time.set_timer(shootEvent, 1000)
+pygame.time.set_timer(spawnEnemy, 2000)
 
 
 def runPyGame():
