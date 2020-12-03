@@ -32,7 +32,7 @@ enemies = pygame.sprite.Group()
 allSprites = pygame.sprite.Group()
 
 # Initialize the grid
-grid = Grid((0, 0), GRID_WIDTH, GRID_HEIGHT, GRID_CELL_SIZE, False)
+grid = Grid((0, 50), GRID_WIDTH, GRID_HEIGHT, GRID_CELL_SIZE, False)
 
 
 def update(dt):
@@ -134,10 +134,6 @@ def draw(screen):
     pygame.display.flip()
 
 
-pygame.time.set_timer(shootEvent, 1000)
-pygame.time.set_timer(spawnEnemy, 2000)
-
-
 def runPyGame():
     # Initialise PyGame.
     pygame.init()
@@ -147,8 +143,7 @@ def runPyGame():
     fpsClock = pygame.time.Clock()
 
     # Set up the window.
-    # width, height = 480, 480
-    screen = pygame.display.set_mode((GRID_CELL_SIZE * GRID_WIDTH, GRID_CELL_SIZE * GRID_HEIGHT))
+    screen = pygame.display.set_mode((GRID_CELL_SIZE * GRID_WIDTH, 800))
 
     # screen is the surface representing the window.
     # PyGame surfaces can be thought of as screen sections that you can draw onto.
@@ -164,5 +159,8 @@ def runPyGame():
 
         dt = fpsClock.tick(fps)
 
+
+pygame.time.set_timer(shootEvent, 1000)
+pygame.time.set_timer(spawnEnemy, 2000)
 
 runPyGame()

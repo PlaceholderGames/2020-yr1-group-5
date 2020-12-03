@@ -21,7 +21,7 @@ class Grid:
 
     cellColor = WHITE
 
-    def __init__(self, initPos=math.Vector2(0, 0), width=10, height=10, cellSize=25, debug=True):
+    def __init__(self, initPos=math.Vector2(0, 0), width: int = 10, height: int = 10, cellSize: int = 25, debug=True):
         self.width = width
         self.height = height
         self.cellSize = cellSize

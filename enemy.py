@@ -4,7 +4,7 @@ import pygame
 
 class Enemy(pygame.sprite.Sprite):
 
-    health = 6
+    health = 3
 
     def __init__(self, image=os.path.join('Assets', 'towerDefense_tile271.png'), size=64):
         super().__init__()
