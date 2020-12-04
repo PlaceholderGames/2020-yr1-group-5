@@ -26,7 +26,7 @@ class Grid:
         self.height = height
         self.cellSize = cellSize
         self.initPos = initPos
-        self.cells = [[0 for j in range(width)] for i in range(height)]
+        self.cells = [[0 for j in range(height)] for i in range(width)]
         self.debug = debug
 
     def getWorldPos(self, pos):

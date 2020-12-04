@@ -23,4 +23,4 @@ class Tower(pygame.sprite.Sprite):
         # Update the position of this object by setting the values of rect.x and rect.y
         self.rect = self.image.get_rect()
 
-        self.image = pygame.transform.rotate(self.image, -90);
+        self.image = pygame.transform.rotate(self.image, -90)

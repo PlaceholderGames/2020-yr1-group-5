@@ -2,6 +2,7 @@
 CS1S464 2020 Group 5
 
 ## Main
+- [x] Score
 - [ ]  **Projectiles**
     - [x] Spawn projectiles
     - [x] Move projectiles
