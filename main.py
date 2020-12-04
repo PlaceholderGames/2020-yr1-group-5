@@ -17,7 +17,7 @@ from tower import Tower
 from projectile import Projectile
 from enemy import Enemy
 
-score = 0
+score = 100
 
 class Game:
     FPS = 144.0
@@ -51,6 +51,8 @@ class Game:
 
         and this will scale your velocity based on time. Extend as necessary."""
 
+        global score
+
         # Go through events that are passed to the script by the window.
         for event in pygame.event.get():
             # We need to handle these events. Initially the only one you'll want to care
@@ -64,8 +66,6 @@ class Game:
             # When 'Delete' is pressed the grid is cleared
             elif event.type == KEYDOWN:
                 if event.key == K_DELETE:
-                    global score
-                    score += 50
                     self.grid.cells = [[0 for j in range(self.grid.height)]
                                        for i in range(self.grid.width)]
                     for sprite in self.allSprites:
@@ -86,7 +86,9 @@ class Game:
 
                 # On left mouse click set the cells value to 64.
                 elif event.button == 1:
-                    self.grid.setValue(grid_pos, 1)
+                    if self.grid.getValue(grid_pos) != 2 and score >= 50:
+                        self.grid.setValue(grid_pos, 1)
+                        score -= 50
 
             elif event.type == self.shootEvent:
                 for x in range(self.grid.width):
