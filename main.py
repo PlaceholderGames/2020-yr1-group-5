@@ -19,6 +19,7 @@ from enemy import Enemy
 
 score = 100
 
+
 class Game:
     FPS = 144.0
 
@@ -27,9 +28,10 @@ class Game:
     GRID_HEIGHT = 5
 
     # Custom events
-    shootEvent = pygame.USEREVENT + 0
+    shootEvent_old = pygame.USEREVENT + 0
     spawnEnemy = pygame.USEREVENT + 1
     enemyKilled = pygame.USEREVENT + 2
+    shootEvent = pygame.USEREVENT + 3
 
     # Define lists of sprites
     towers = pygame.sprite.Group()
@@ -90,7 +92,7 @@ class Game:
                         self.grid.setValue(grid_pos, 1)
                         score -= 50
 
-            elif event.type == self.shootEvent:
+            elif event.type == self.shootEvent_old:
                 for x in range(self.grid.width):
                     for y in range(self.grid.height):
                         if self.grid.getValue((x, y)) == 2:
@@ -112,10 +114,17 @@ class Game:
             elif event.type == self.enemyKilled:
                 score += 50
 
+            elif event.type == self.shootEvent:
+                projectile = Projectile()
+                projectile.rect.x = event.tower.rect.x
+                projectile.rect.y = event.tower.rect.y
+                self.projectiles.add(projectile)
+                self.allSprites.add(projectile)
+
         # Handle other events as you wish.
 
         self.grid.update(dt)
-        self.towers.update()
+        self.towers.update(dt)
         self.projectiles.update(dt, self.grid)
         self.enemies.update(dt, self.projectiles)
 
@@ -165,6 +174,7 @@ class Game:
         # Set up the window.
         screen = pygame.display.set_mode(((self.GRID_CELL_SIZE * self.GRID_WIDTH) + self.grid.initPos[0],
                                           (self.GRID_CELL_SIZE * self.GRID_HEIGHT) + self.grid.initPos[1]))
+        pygame.display.set_caption("Game Window")
 
         # screen is the surface representing the window.
         # PyGame surfaces can be thought of as screen sections that you can draw onto.
@@ -180,7 +190,7 @@ class Game:
 
             dt = fpsClock.tick(fps)
 
-    pygame.time.set_timer(shootEvent, 1000)
+    #pygame.time.set_timer(shootEvent, 1000)
     pygame.time.set_timer(spawnEnemy, 2000)
 
 

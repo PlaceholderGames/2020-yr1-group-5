@@ -6,7 +6,8 @@ CS1S464 2020 Group 5
 - [ ]  **Projectiles**
     - [x] Spawn projectiles
     - [x] Move projectiles
-    - [x] Delete projectiles when off screen
+    - [x] Delete projectiles when off-screen
+    - [x] Spawn projectiles on independent timers 
     - [ ] ...
 - [ ] **Enemies**
     - [x] Spawn enemies
