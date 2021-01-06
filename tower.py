@@ -8,7 +8,8 @@ from grid import Grid
 
 class Tower(pygame.sprite.Sprite):
 
-    def __init__(self, image=os.path.join('Assets', 'towerDefense_tile249.png'), size=64):
+    # Placeholder is towerDefense_tile249.png
+    def __init__(self, image=os.path.join('Assets', 'turret1_64.png'), size=64):
         super().__init__()
 
         self.size = size
@@ -17,23 +18,23 @@ class Tower(pygame.sprite.Sprite):
         self.image = pygame.image.load(image)
 
         # Change the scale of the sprite
-        self.image = pygame.transform.scale(self.image, (self.size, self.size))
+        #self.image = pygame.transform.scale(self.image, (self.size, self.size))
 
         # Fetch the rectangle object that has the dimensions of the image
         # Update the position of this object by setting the values of rect.x and rect.y
         self.rect = self.image.get_rect()
 
         # Rotate the sprite so it is facing the right way.
-        self.image = pygame.transform.rotate(self.image, -90)
+        #self.image = pygame.transform.rotate(self.image, -90)
 
         # Preparation for use of a sprite sheet.
         # If the file is already 64x64 nothing happens.
-        self.image = pygame.Surface.subsurface(self.image, (0, 0), (64, 64))
+        #self.image = pygame.Surface.subsurface(self.image, (0, 0), (64, 64))
 
         # Declare custom event
         self.myEvent = pygame.event.Event(pygame.USEREVENT+3, tower=self)
         # Declare the shoot interval
-        self.shootInterval = 0.75
+        self.shootInterval = 1.75
         # Set the initial value of the timer
         self.timer = self.shootInterval
 

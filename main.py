@@ -133,7 +133,8 @@ class Game:
             for y in range(self.grid.height):
                 if self.grid.getValue((x, y)) == 1:
                     tower = Tower(size=self.GRID_CELL_SIZE)
-                    tower.rect.x = (x * self.grid.cellSize) + self.grid.initPos[0]
+                    tower.rect.x = (x * self.grid.cellSize) + self.grid.initPos[0] \
+                                   + (self.grid.cellSize / 2 - tower.rect.width / 2)
                     tower.rect.y = (y * self.grid.cellSize) + self.grid.initPos[1]
                     self.towers.add(tower)
                     self.allSprites.add(tower)
@@ -190,7 +191,6 @@ class Game:
 
             dt = fpsClock.tick(fps)
 
-    #pygame.time.set_timer(shootEvent, 1000)
     pygame.time.set_timer(spawnEnemy, 2000)
 
 

@@ -4,8 +4,21 @@ import pygame
 
 class Projectile(pygame.sprite.Sprite):
 
-    def __init__(self, image=os.path.join('Assets', 'towerDefense_tile295.png'), size=64):
+    def rotCenter(self, image, angle):
+        """rotate an image while keeping its center and size"""
+        orig_rect = image.get_rect()
+        rot_image = pygame.transform.rotate(image, angle)
+        rot_rect = orig_rect.copy()
+        rot_rect.center = rot_image.get_rect().center
+        rot_image = rot_image.subsurface(rot_rect).copy()
+        return rot_image
+
+    # Placeholder: towerDefense_tile295.png
+    def __init__(self, image=os.path.join('Assets', 'controller.png'), size=64):
         super().__init__()
+
+        self.speed = 0.2
+        self.rotationSpeed = 1
 
         self.size = size
 
@@ -22,7 +35,13 @@ class Projectile(pygame.sprite.Sprite):
         self.image = pygame.transform.rotate(self.image, 90)
 
     def update(self, dt, grid) -> None:
-        self.rect.x += 0.5 * dt
+
+        '''rotation = 0
+        rotation += self.rotationSpeed
+
+        self.image = self.rotCenter(self.image, rotation)'''
+
+        self.rect.x += self.speed * dt
 
         if self.rect.x > grid.width * grid.cellSize:
             self.kill()
